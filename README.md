@@ -19,9 +19,6 @@ conda create -n ravel python=3.10 -y
 conda activate ravel
 
 # Install torch and torchvision using the command selected for your CUDA version.
-# Install the remaining RAVEL dependencies with the repository requirements file:
-
-```bash
 python -m pip install -r requirements.txt
 ```
 
