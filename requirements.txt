@@ -1,0 +1,37 @@
+# RAVEL runtime dependencies
+# Install torch and torchvision separately with the CUDA wheel selected for
+# the target machine before installing this file.
+
+accelerate
+bitsandbytes
+datasets
+deepspeed
+transformers
+peft
+safetensors
+tokenizers
+huggingface_hub
+numpy
+scipy
+scikit-learn
+pillow
+pyyaml
+tqdm
+einops
+timm
+ftfy
+regex
+prettytable
+shortuuid
+rouge
+decord
+diffusers
+matplotlib
+openai
+httpx
+requests
+qwen-vl-utils
+wandb
+tyro
+sglang
+

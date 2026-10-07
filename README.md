@@ -19,27 +19,10 @@ conda create -n ravel python=3.10 -y
 conda activate ravel
 
 # Install torch and torchvision using the command selected for your CUDA version.
-# Then install the RAVEL Python dependencies:
-python -m pip install \
-  accelerate bitsandbytes datasets deepspeed \
-  transformers peft safetensors tokenizers huggingface_hub \
-  numpy scipy scikit-learn pillow pyyaml tqdm einops timm \
-  ftfy regex prettytable shortuuid rouge \
-  openai httpx requests qwen-vl-utils wandb tyro
-```
-
-The repository vendors the project-side LLaVA and TRL code, so they do not
-need to be installed as separate packages. flash-attn is optional: the
-curated configs use SDPA by default. Install it separately only when
-attn_implementation: flash_attention_2 is selected.
-
-Run commands from the repository root and expose the main package directory:
+# Install the remaining RAVEL dependencies with the repository requirements file:
 
 ```bash
-cd /path/to/RAVEL
-conda activate ravel
-export PYTHONPATH="$PWD/code/main:$PYTHONPATH"
-export RAVEL_PYTHON=python
+python -m pip install -r requirements.txt
 ```
 
 Check the environment before launching a long job:
