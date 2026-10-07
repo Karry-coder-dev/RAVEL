@@ -1,0 +1,49 @@
+# External benchmark images and transfer assets
+dataset/interactive-pedes/CUHK-PEDES/
+dataset/interactive-pedes/ICFG-PEDES/
+dataset/interactive-pedes/default/
+dataset/interactive-pedes/preprocessed_data.pt
+dataset/interactive-pedes/Interactive-PEDES_interactive_annos.json
+external/
+
+# Generated evaluation artifacts; compact JSON/JSONL records remain trackable.
+dataset/evaluation-records/**/*.log
+dataset/evaluation-records/**/*.html
+dataset/evaluation-records/**/*.pt
+dataset/evaluation-records/**/*.pth
+dataset/evaluation-records/**/samples/
+dataset/evaluation-records/**/visualizations/
+dataset/evaluation-records/**/*_samples.jsonl
+
+# Local machine and editor files
+.DS_Store
+.chart-data-*
+.codex-build/
+.codex-finalizer*
+.codex-ppt-*
+.ppt_exports/
+
+# Large model and retriever checkpoints
+weight/**/*.bin
+weight/**/*.pth
+weight/**/*.pt
+weight/**/*.safetensors
+weight/**/pytorch_model.bin*
+weight/**/model-*.safetensors
+
+# Python caches
+__pycache__/
+*.py[cod]
+
+# Do not publish full model weights, raw benchmark data, or generated run archives.
+weight/
+dataset/evaluation-records/
+dataset/sft/
+dataset/interactive-pedes/preprocessed_data.pt
+dataset/interactive-pedes/Interactive-PEDES_interactive_annos.json
+dataset/interactive-pedes/default/
+dataset/rl-3k/
+dataset/rl-5k/
+dataset/qwen3-vl-32b-records/
+dataset/human-review-101/
+code/main/model/llava/model/llava_arch.py.bak_*

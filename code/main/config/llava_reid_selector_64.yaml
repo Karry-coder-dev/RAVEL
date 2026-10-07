@@ -1,0 +1,26 @@
+project_name: CUHK_RDE_transfer
+run_name: llava-reid-selector
+wandb_enable: false
+
+img_aug: true
+dataset_name: CUHK-PEDES
+data_dir: ./dataset/interactive-pedes
+llava_config_file: ./code/main/config/train_question.yaml
+max_retrieve_length: 192
+interact_round: 5
+num_candidates: 4
+stage: eval
+
+stage_config:
+  eval:
+    answerer_base_url: http://localhost:10500/v1
+    answerer_api_key: Qwen-7B
+    answer_max_tokens: 64
+    batch_size: 32
+    interact_round: 5
+    question_model_path: ./weight/official-selector-baseline
+    selector_model_path: ./weight/official-selector-baseline
+    checkpoint_name: llava-reid-selector
+    questioner_rank1_only: false
+    questioner_shuffle_top4: false
+    wandb_enable: false

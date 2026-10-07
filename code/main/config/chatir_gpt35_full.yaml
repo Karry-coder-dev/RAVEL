@@ -1,0 +1,53 @@
+project_name: interactive_retrieval
+run_name: main_experiment
+wandb_enable: false
+
+img_aug: true
+dataset_name: Interactive-PEDES
+data_dir: ./dataset/interactive-pedes
+llava_config_file: ./code/main/config/train_question.yaml
+max_retrieve_length: 192
+interact_round: 5
+num_candidates: 4
+stage: train_retriever
+
+stage_config:
+
+  train_retriever:
+    num_epoch: 30
+    batch_size: 32
+    lr: 1.0e-5
+
+  prepare_data:
+    interact_round: 5
+    batch_size: 256
+
+  warmup_selector:
+    batch_size: 64
+    num_epoch: 10
+    warmup_epochs: 0
+    lr: 1.0e-5
+    bias_lr_factor: 1.0
+
+  train_selector:
+    llava_config_file: ./code/main/config/train_selector.yaml
+    selector_model_path: null
+
+  eval:
+    answerer_base_url: http://localhost:10500/v1
+    answerer_api_key: Qwen-7B
+    answer_max_tokens: 64
+    batch_size: 512
+    interactive_text_batch_size: 7373
+    interact_round: 5
+    project_name: Interactive_eval
+
+    question_model_path: ./weight/reference-model
+    questioner_api_url: http://127.0.0.1:18080
+    questioner_api_timeout: 7200
+    round_state_path: ./dataset/evaluation-records/rl-analysis/chatir_round_state.pt
+    selector_model_path: null
+    checkpoint_name: chatir_gpt35_roundbatch1000
+    questioner_rank1_only: false
+    questioner_shuffle_top4: false
+    wandb_enable: false

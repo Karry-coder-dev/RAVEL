@@ -1,0 +1,52 @@
+project_name: interactive_retrieval
+run_name: main_experiment
+wandb_enable: false
+
+img_aug: true
+dataset_name: Interactive-PEDES
+data_dir: ./dataset/interactive-pedes # Path to your data folder
+llava_config_file: ./code/main/config/train_question.yaml
+max_retrieve_length: 192
+interact_round: 5
+num_candidates: 4
+
+#stage: train_retriever
+#stage: prepare_data
+#stage: train_questioner
+#stage: warmup_selector
+stage: train_retriever
+
+stage_config:
+
+  train_retriever:
+    num_epoch: 30
+    batch_size: 32
+    lr: 1.0e-5
+
+  prepare_data:
+    interact_round: 5
+    batch_size: 256
+
+  warmup_selector:
+    batch_size: 64
+    num_epoch: 10
+    warmup_epochs: 0
+    lr: 1.0e-5
+    bias_lr_factor: 1.0
+
+  train_selector:
+    llava_config_file: ./code/main/config/train_selector.yaml
+    selector_model_path: ./weight/selector-interactive-pedes
+
+  eval:
+    batch_size: 4
+    interact_round: 5
+    project_name: Interactive_eval
+
+    question_model_path: ./weight/reference-model
+    selector_model_path: ./weight/reference-model
+    checkpoint_name: Conv_llava-reid-rank1-aware-questioner
+    wandb_enable: false
+
+
+# CUDA_VISIBLE_DEVICES=4,5,6,7 python3.10 -m torch.distributed.launch --nproc_per_node 4 --master_port 8893 main_interactive_train.py --config_file=config/ICFG_PEDES_interactive.yaml
